@@ -31,7 +31,7 @@ namespace Caffeine
         private readonly Rectangle _bounds = Screen.PrimaryScreen.Bounds;
         private readonly IntPtr _hWin;
         private readonly System.Timers.Timer _callbackTimer;
-        private readonly LASTINPUTINFO _lastInput;
+        private LASTINPUTINFO _lastInput;
 
         private uint _lastChange;
         private TimeSpan _interval;
@@ -63,7 +63,7 @@ namespace Caffeine
         {
             try
             {
-                Win32API.GetLastInputInfo(in _lastInput);
+                Win32API.GetLastInputInfo(ref _lastInput);
                 if (_lastInput.dwTime != _lastChange) // User is not idle -> Reset Stopwatch
                 {
                     _lastChange = _lastInput.dwTime;
@@ -103,7 +103,7 @@ namespace Caffeine
         private void ResetInterval()
         {
             SetRandomInterval(ref _interval);
-            Win32API.GetLastInputInfo(in _lastInput);
+            Win32API.GetLastInputInfo(ref _lastInput);
             _lastChange = _lastInput.dwTime;
         }
 
