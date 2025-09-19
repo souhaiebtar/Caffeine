@@ -23,7 +23,7 @@ namespace Caffeine
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern uint SetThreadExecutionState(uint esFlags);
         [DllImport("user32.dll")]
-        public static extern bool GetLastInputInfo(in LASTINPUTINFO plii);
+        public static extern bool GetLastInputInfo(ref LASTINPUTINFO plii);
         [DllImport("user32.dll")]
         private static extern uint SendInput (uint nInputs, [MarshalAs(UnmanagedType.LPArray), In] INPUT[] pInputs, int cbSize);
         [DllImport("user32.dll")]
